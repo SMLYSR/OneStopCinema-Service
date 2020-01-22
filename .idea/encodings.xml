@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-CinemaService" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-ConfigCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-FilmService" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-GatewayCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-MonitorCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-OrderCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-RegisterCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSCP-UserCenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OSPC-PaymentCenter" charset="UTF-8" />
+  </component>
+</project>
