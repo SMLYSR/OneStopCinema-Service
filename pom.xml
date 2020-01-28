@@ -27,6 +27,7 @@
         <module>OSCP-FilmService</module>
         <module>OSCP-OrderCenter</module>
         <module>OSPC-PaymentCenter</module>
+        <module>OSCP-SystemAPI</module>
     </modules>
 
     <properties>
@@ -71,6 +72,10 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
@@ -91,6 +96,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.logstash.logback</groupId>
