@@ -1,4 +1,4 @@
-package org.joker.oscp.user.entity;
+package org.joker.oscp.user.entity.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 

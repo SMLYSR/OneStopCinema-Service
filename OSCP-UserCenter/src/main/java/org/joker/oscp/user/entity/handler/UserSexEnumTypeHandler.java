@@ -2,7 +2,7 @@ package org.joker.oscp.user.entity.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.joker.oscp.user.entity.UserSexEnum;
+import org.joker.oscp.user.entity.enums.UserSexEnum;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

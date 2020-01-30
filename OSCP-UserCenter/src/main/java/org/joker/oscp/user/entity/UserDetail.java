@@ -1,36 +1,26 @@
 package org.joker.oscp.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.joker.oscp.user.entity.enums.UserSexEnum;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
- * 用户实体类
+ * 用户详情实体
  * @author JOKER
  */
 @Data
-public class UserModel {
-
+@TableName("uc_user_detail")
+public class UserDetail {
     /**
      * 主键编号
      */
+
+    @TableId
     private Long uuid;
-
-    /**
-     * 用户名
-     */
-    private String userName;
-
-    /**
-     * 用户密码
-     */
-    private String userPwd;
-
-    /**
-     * 账户状态
-     */
-    private int userState;
-
     /**
      * 用户昵称
      */
@@ -39,12 +29,12 @@ public class UserModel {
     /**
      * 用户性别
      */
-    private UserSexEnum  userSex;
+    private UserSexEnum userSex;
 
     /**
      * 用户生日
      */
-    private Date birthday;
+    private LocalDate birthday;
 
     /**
      * 用户生日
@@ -70,5 +60,4 @@ public class UserModel {
      * 用户简介
      */
     private  String biography;
-
 }

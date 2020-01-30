@@ -21,10 +21,10 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml
   type-aliases-type: org.joker.oscp.user.entity
   global-config:
-    banner: true
+    banner: false
     db-config:
-      id-type: input
       field-strategy: not_empty
+      id-type: id_worker
     configuration:
       map-underscore-to-camel-case: false
       cache-enabled: true #配置的缓存的全局开关
@@ -32,4 +32,9 @@ mybatis-plus:
       multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
 
-
+logging:
+  level:
+    root: warn
+    org.joker.oscp.user.dao: trace
+  pattern:
+    console: '%p%m%n'
