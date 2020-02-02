@@ -28,6 +28,8 @@
         <module>OSCP-OrderCenter</module>
         <module>OSPC-PaymentCenter</module>
         <module>OSCP-SystemAPI</module>
+        <module>OSCP-Common</module>
+        <module>OSCP-security</module>
     </modules>
 
     <properties>
@@ -43,12 +45,13 @@
         <pagehelper-starter.version>1.2.10</pagehelper-starter.version>
         <pagehelper.version>5.1.8</pagehelper.version>
         <spring-data-commons.version>2.1.5.RELEASE</spring-data-commons.version>
-        <jjwt.version>0.9.0</jjwt.version>
+        <jjwt.version>0.9.1</jjwt.version>
         <minio.version>3.0.10</minio.version>
         <swagger2.version>2.7.0</swagger2.version>
         <logstash-logback.version>5.3</logstash-logback.version>
         <justauth.version>1.13.2</justauth.version>
         <admin-starter-server.version>2.1.5</admin-starter-server.version>
+        <logstash-logback-encoder.version>5.3</logstash-logback-encoder.version>
         <!--  以下集成自定义模块  -->
     </properties>
 

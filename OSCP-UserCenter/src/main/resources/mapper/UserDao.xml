@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.joker.oscp.user.dao.UserMapper">
+    <resultMap id="UserJoinMap" type="org.joker.oscp.user.entity.UserJoin">
+        <result column="UUID" property="uuid" />
+        <result column="user_name" property="userName"/>
+        <result column="user_pwd" property="userPwd"/>
+        <result column="user_state" property="userState"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="user_sex" property="userSex" />
+<!--                typeHandler="org.joker.oscp.user.entity.handler.UserSexEnumTypeHandler"/>-->
+        <result column="birthday" property="birthday"/>
+        <result column="email" property="email"/>
+        <result column="user_phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="head_url" property="handUrl"/>
+        <result column="biography" property="biography"/>
+    </resultMap>
+
+    <select id="selectByUsername" resultMap="UserJoinMap">
+        SELECT
+	        u.UUID,
+	        u.user_name,
+            u.user_pwd,
+            u.user_state,
+            ud.nick_name,
+            ud.user_sex,
+            ud.birthday,
+            ud.email,
+            ud.user_phone,
+            ud.address,
+            ud.head_url,
+            ud.biography
+        FROM
+	        uc_user u
+	    LEFT JOIN uc_user_detail ud ON u.UUID = ud.UUID
+        WHERE
+	        u.user_name = #{username, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

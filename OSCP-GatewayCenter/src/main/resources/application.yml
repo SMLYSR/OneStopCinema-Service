@@ -1,0 +1,26 @@
+server:
+  port: 8001
+
+service-url:
+  OSCP-UserCenter: http://localhost:9001
+
+
+jwt:
+  header: X-Auth-Token   #jwt的请求头
+  secret: eyJleHAiOjE1NDMyMDUyODUsInN1YiI6ImFkbWluIiwiY3Jl   #jwt的加密字符串
+  expiration: 604800   #7天 单位:秒
+  auth-path: auth
+
+ignoreList:
+  ignore-url: /user/check,/film/getIndex,/film/getConditionList,/film/getFilms,/film/films,/cinema/getCinemas,/cinema/getCondition,/cinema/getFields,/cinema/getFieldInfo #忽略列表
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: path_route #路由的ID
+          uri: ${service-url.OSCP-UserCenter}/user #匹配后路由地址
+          predicates: # 断言，路径相匹配的进行路由
+            - Path=/user
+
+

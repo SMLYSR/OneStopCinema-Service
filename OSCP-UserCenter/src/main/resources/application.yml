@@ -18,8 +18,10 @@ spring:
         login-password: druid
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*/*.xml
-  type-aliases-type: org.joker.oscp.user.entity
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.joker.oscp.user.entity;
+  type-handlers-package: org.joker.oscp.user.entity.handler;
+  type-enums-package: org.joker.oscp.user.entity.enums;
   global-config:
     banner: false
     db-config:

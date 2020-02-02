@@ -2,6 +2,7 @@ package org.joker.oscp.user.entity.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedTypes;
 import org.joker.oscp.user.entity.enums.UserSexEnum;
 
 import java.sql.CallableStatement;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
  * {@link UserSexEnum} 类型映射器
  * @author JOKER
  */
+@MappedTypes(UserSexEnum.class)
 public class UserSexEnumTypeHandler extends BaseTypeHandler<UserSexEnum> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, UserSexEnum userSexEnum, JdbcType jdbcType) throws SQLException {

@@ -6,6 +6,7 @@ import org.joker.oscp.user.dao.UserDetailMapper;
 import org.joker.oscp.user.dao.UserMapper;
 import org.joker.oscp.user.entity.User;
 import org.joker.oscp.user.entity.UserDetail;
+import org.joker.oscp.user.entity.UserJoin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,13 @@ public class TestUserMapper {
         userDetail.setBirthday(date);
         int updateState = userDetailMapper.updateById(userDetail);
         log.info("用户详情更新状态: {}", updateState);
+    }
+
+    // 用户连接查询
+    @Test
+    public void testJoinUser() {
+        String username = "JOKER";
+        UserJoin userJoin = userMapper.selectByUsername(username);
+        log.info("result: {}", userJoin);
     }
 }

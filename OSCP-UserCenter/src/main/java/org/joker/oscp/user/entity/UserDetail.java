@@ -3,9 +3,7 @@ package org.joker.oscp.user.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.joker.oscp.user.entity.enums.UserSexEnum;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -29,7 +27,7 @@ public class UserDetail {
     /**
      * 用户性别
      */
-    private UserSexEnum userSex;
+    private int userSex;
 
     /**
      * 用户生日
