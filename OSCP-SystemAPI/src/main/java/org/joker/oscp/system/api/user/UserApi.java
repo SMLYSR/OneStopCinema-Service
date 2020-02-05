@@ -38,7 +38,7 @@ public interface UserApi {
      * @param uuid
      * @return 返回 {@link UserInfoModel}
      */
-    UserInfoModel getUserInfo(int uuid);
+    UserInfoModel getUserInfo(Long uuid);
 
     /**
      * 更新用户信息

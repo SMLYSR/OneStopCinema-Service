@@ -11,7 +11,7 @@
 <!--                typeHandler="org.joker.oscp.user.entity.handler.UserSexEnumTypeHandler"/>-->
         <result column="birthday" property="birthday"/>
         <result column="email" property="email"/>
-        <result column="user_phone" property="phone"/>
+        <result column="phone" property="phone"/>
         <result column="address" property="address"/>
         <result column="head_url" property="handUrl"/>
         <result column="biography" property="biography"/>
@@ -27,7 +27,7 @@
             ud.user_sex,
             ud.birthday,
             ud.email,
-            ud.user_phone,
+            ud.phone,
             ud.address,
             ud.head_url,
             ud.biography

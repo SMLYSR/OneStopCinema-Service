@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "${jwt.auth-path}")
-    public CommonResult createAuthenticationToken(AuthRequest authRequest) throws AuthenticationException {
+    public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest) throws AuthenticationException {
 
         UsernamePasswordAuthenticationToken authenticationToken = new
                 UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword());
@@ -52,6 +53,6 @@ public class AuthController {
 
         String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
 
-        return CommonResult.success("鉴权成功！",userAuthorizationToken);
+        return CommonResult.success(userAuthorizationToken,"鉴权成功！");
     }
 }

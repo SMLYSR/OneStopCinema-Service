@@ -22,8 +22,8 @@ public class TestController {
     public void testFeign() {
         String username = "JOKER";
 
-        UserModel userModel = userCenterFeigned.selectByUsername(username);
+//        UserModel userModel = userCenterFeigned.selectByUsername(username);
 
-        log.info("{}",userModel);
+//        log.info("{}",userModel);
     }
 }

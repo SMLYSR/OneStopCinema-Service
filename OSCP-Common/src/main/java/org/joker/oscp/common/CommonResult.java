@@ -12,7 +12,7 @@ public class CommonResult<T> {
     private String message;
     private T data;
 
-    protected CommonResult() {
+    public CommonResult(ResultCode serviceFailed, String message) {
     }
 
     protected CommonResult(long code, String message, T data) {
@@ -46,6 +46,16 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> failed(IErrorCode errorCode) {
         return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
+    }
+
+    /**
+     * 业务失败
+     * @param message
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> serviceFailed(String message) {
+        return new CommonResult<T>(ResultCode.SERVICE_FAILED.getCode(), message,null);
     }
 
     /**
@@ -92,4 +102,11 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
     }
 
+    public static <T> CommonResult<T> usernameExists() {
+        return new CommonResult<T>(ResultCode.USERNAME_EXISTS.getCode(), ResultCode.USERNAME_EXISTS.getMessage(), null);
+    }
+
+    public static <T> CommonResult<T> usernameNotExists() {
+        return new CommonResult<T>(ResultCode.USERNAME_NOT_EXTSTS.getCode(), ResultCode.USERNAME_NOT_EXTSTS.getMessage(), null);
+    }
 }

@@ -102,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @return Cors过滤器
      */
     @Bean
-    public org.springframework.web.filter.CorsFilter corsFilter() {
+    public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration cors = new CorsConfiguration();
         cors.setAllowCredentials(true);

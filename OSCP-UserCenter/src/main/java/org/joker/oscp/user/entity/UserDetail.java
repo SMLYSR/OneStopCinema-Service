@@ -1,5 +1,6 @@
 package org.joker.oscp.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -16,7 +17,6 @@ public class UserDetail {
     /**
      * 主键编号
      */
-
     @TableId
     private Long uuid;
     /**
@@ -52,6 +52,7 @@ public class UserDetail {
     /**
      * 用户头像URL
      */
+    @TableField("head_url")
     private String handUrl;
 
     /**
