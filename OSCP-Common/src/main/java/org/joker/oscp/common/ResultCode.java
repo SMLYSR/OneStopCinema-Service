@@ -2,14 +2,15 @@ package org.joker.oscp.common;
 
 /**
  * 枚举了一些常用API操作码
- * Created by macro on 2019/4/19.
+ * @author macro
  */
 public enum ResultCode implements IErrorCode {
-    SUCCESS(200, "操作成功"),
-    FAILED(500, "操作失败"),
+    SUCCESS(200, "操作成功！"),
+    FAILED(500, "系统异常，请查看日志！"),
     VALIDATE_FAILED(404, "参数检验失败"),
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
-    FORBIDDEN(403, "没有相关权限"),
+    FORBIDDEN(403, "鉴权失败"),
+    // 业务异常
     SERVICE_FAILED(555,"业务失败"),
     USERNAME_EXISTS(5550,"用户名已存在"),
     USERNAME_NOT_EXTSTS(5551,"用户名不存在");

@@ -2,7 +2,6 @@ package org.joker.oscp.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
-import org.joker.oscp.common.ResultCode;
 import org.joker.oscp.system.api.user.UserApi;
 import org.joker.oscp.system.api.user.vo.UserInfoModel;
 import org.joker.oscp.system.api.user.vo.UserModel;
@@ -25,39 +24,64 @@ public class UserController {
         this.userApi = userApi;
     }
 
-    @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
-    public UserInfoModel getUserInfo(@RequestParam(value = "uuid") Long uuid) {
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    public CommonResult getUserInfo(@RequestParam(value = "uuid") Long uuid) {
         if (uuid != null) {
-            return userApi.getUserInfo(uuid);
+            UserInfoModel userInfoModel = userApi.getUserInfo(uuid);
+            if (userInfoModel != null) {
+                return CommonResult.success(userInfoModel,"操作成功!");
+            } else {
+                return CommonResult.serviceFailed("业务失败");
+            }
         }
-        return null;
+        return CommonResult.failed("系统异常，请查看日志！");
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public boolean register(@RequestBody UserModel userModel) {
+    public CommonResult register(@RequestBody UserModel userModel) {
         if (userModel != null){
-            return userApi.register(userModel);
+            boolean isRegister = userApi.register(userModel);
+            if (!isRegister) {
+                return CommonResult.serviceFailed("注册失败");
+            } else {
+                return CommonResult.success(true);
+            }
         }
-        return false;
+        log.info("入参错误，为空!!!");
+        return CommonResult.failed("系统异常，请查看日志！");
     }
 
     @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
-    public boolean checkUsername(@RequestParam(value = "username") String username) {
+    public CommonResult checkUsername(@RequestParam(value = "username") String username) {
         if (username != null){
             boolean isUsername = userApi.checkUsername(username);
             if (isUsername) {
-                return true;
+                return CommonResult.success(true,"用户名合法！");
+            } else {
+                return CommonResult.usernameExists();
             }
         }
-        return false;
+        log.info("入参错误，为空!!!");
+        return CommonResult.failed("系统异常，请查看日志！");
     }
 
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
-    public UserInfoModel updateUserInfo(@RequestBody UserInfoModel userInfoModel) {
+    public CommonResult updateUserInfo(@RequestBody UserInfoModel userInfoModel) {
         if (userInfoModel != null) {
-            return userApi.updateUserInfo(userInfoModel);
+            UserInfoModel newUserInfoModel = userApi.updateUserInfo(userInfoModel);
+            if (newUserInfoModel != null) {
+                return CommonResult.success(newUserInfoModel);
+            } else {
+                return CommonResult.serviceFailed("用户信息更新失败！");
+            }
         }
-        return null;
+        log.info("入参错误，为空!!!");
+        return CommonResult.failed("系统异常，请查看日志！");
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public CommonResult logout() {
+        return CommonResult.success("退出成功");
     }
 
     @RequestMapping(value = "/selectByUsername", method = RequestMethod.POST)

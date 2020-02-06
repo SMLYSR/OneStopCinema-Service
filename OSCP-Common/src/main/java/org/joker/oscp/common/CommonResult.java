@@ -98,8 +98,8 @@ public class CommonResult<T> {
     /**
      * 未授权返回结果
      */
-    public static <T> CommonResult<T> forbidden(T data) {
-        return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
+    public static <T> CommonResult<T> forbidden() {
+        return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), null);
     }
 
     public static <T> CommonResult<T> usernameExists() {

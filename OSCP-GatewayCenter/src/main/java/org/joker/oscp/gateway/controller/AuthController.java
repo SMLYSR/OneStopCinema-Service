@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.AuthenticationException;
@@ -39,20 +40,21 @@ public class AuthController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    @RequestMapping(value = "${jwt.auth-path}")
-    public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest) throws AuthenticationException {
+    @RequestMapping(value = "${jwt.auth-path}", method = RequestMethod.POST)
+    public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new
                 UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword());
 
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
-        log.debug("已完成鉴权！权限为：{}", authentication);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
-
-        return CommonResult.success(userAuthorizationToken,"鉴权成功！");
+        try {
+            Authentication  authentication = authenticationManager.authenticate(authenticationToken);
+            log.debug("已完成鉴权！权限为：{}", authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
+            return CommonResult.success(userAuthorizationToken,"鉴权成功！");
+        } catch (org.springframework.security.core.AuthenticationException e) {
+            log.info("鉴权失败！！！");
+            return CommonResult.forbidden();
+        }
     }
 }
