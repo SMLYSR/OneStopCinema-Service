@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: oscp-config-center
+  cloud:
+    config:
+      uri:
+server:
+  port: 8002
+

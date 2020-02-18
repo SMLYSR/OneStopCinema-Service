@@ -12,3 +12,5 @@ eureka:
     register-with-eureka: false
     service-url:
       defaultZone: http://localhost:${server.port}/eureka
+  server:
+    enable-self-preservation: false

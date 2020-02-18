@@ -1,7 +1,6 @@
 package org.joker.oscp.user.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.joker.oscp.user.entity.User;
 import org.joker.oscp.user.entity.UserDetail;
 import org.springframework.stereotype.Repository;
 

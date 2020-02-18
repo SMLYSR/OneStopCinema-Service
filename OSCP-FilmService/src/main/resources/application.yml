@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002
   servlet:
     context-path: /film
 
@@ -23,9 +23,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.joker.oscp.user.entity;
-  type-handlers-package: org.joker.oscp.user.entity.handler;
-  type-enums-package: org.joker.oscp.user.entity.enums;
+  type-aliases-package: org.joker.oscp.film.entity;
   global-config:
     banner: false
     db-config:

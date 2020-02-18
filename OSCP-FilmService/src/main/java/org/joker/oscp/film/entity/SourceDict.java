@@ -1,8 +1,8 @@
 package org.joker.oscp.film.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
 /**
@@ -10,13 +10,13 @@ import lombok.Data;
  * @author JOKER
  */
 @Data
-@TableName("fs_source_dict_")
+@TableName("fs_source_dict")
 public class SourceDict {
     /**
      * 主键编号
      */
     @TableId
-    private Integer uuid;
+    private Long uuid;
     /**
      * 显示名称
      */

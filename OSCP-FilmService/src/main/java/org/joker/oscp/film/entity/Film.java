@@ -1,12 +1,11 @@
 package org.joker.oscp.film.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * 影片实体
@@ -60,7 +59,7 @@ public class Film {
      * 影片分类，参照分类表,多个分类以,分割
      */
     @TableField("film_cats")
-    private Long filmCats;
+    private String filmCats;
     /**
      * 影片区域，参照区域表
      */

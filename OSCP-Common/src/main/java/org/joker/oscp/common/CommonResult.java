@@ -12,6 +12,9 @@ public class CommonResult<T> {
     private String message;
     private T data;
 
+    private int nowPage;
+    private int totalPage;
+
     public CommonResult(ResultCode serviceFailed, String message) {
     }
 
@@ -19,6 +22,14 @@ public class CommonResult<T> {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    protected CommonResult(long code, String message, int nowPage, int totalPage, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.nowPage = nowPage;
+        this.totalPage = totalPage;
     }
 
     /**
@@ -38,6 +49,18 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> success(T data, String message) {
         return new CommonResult<T>(ResultCode.SUCCESS.getCode(), message, data);
+    }
+
+
+    /**
+     * 成功返回结果
+     * @param nowPage 当前页
+     * @param totalPage 总页数
+     * @param data 数据
+     */
+    public static <T> CommonResult<T> success(int nowPage, int totalPage, T data) {
+        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(),
+                                    nowPage, totalPage, data);
     }
 
     /**
