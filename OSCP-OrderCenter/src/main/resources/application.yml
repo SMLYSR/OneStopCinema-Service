@@ -1,12 +1,12 @@
 server:
   port: 9003
   servlet:
-    context-path: /cinema
+    context-path: /order
 
 
 spring:
   application:
-    name: oscp-cinema-service
+    name: oscp-order-center
   datasource:
     url: jdbc:mysql://localhost:3306/local_dome_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
@@ -23,7 +23,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.joker.oscp.cinema.entity;
+  type-aliases-package: org.joker.oscp.order.entity;
   global-config:
     banner: false
     db-config:
