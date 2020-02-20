@@ -3,10 +3,7 @@ package org.joker.oscp.cinema.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.joker.oscp.cinema.dao.*;
-import org.joker.oscp.cinema.entity.AreaDictT;
-import org.joker.oscp.cinema.entity.BrandDictT;
-import org.joker.oscp.cinema.entity.CinemaT;
-import org.joker.oscp.cinema.entity.HallDictT;
+import org.joker.oscp.cinema.entity.*;
 import org.joker.oscp.system.api.cinema.CinemaServiceApi;
 import org.joker.oscp.system.api.cinema.vo.*;
 import org.joker.oscp.system.api.cinema.vo.enums.CinemaQueryEnum;
@@ -202,5 +199,14 @@ public class CinemaServiceImpl implements CinemaServiceApi {
     public FilmInfoVO getFilmInfoByFieldId(Long fieldId) {
         FilmInfoVO filmInfoVO = fieldTMapper.getFilmInfoById(fieldId);
         return filmInfoVO;
+    }
+
+    @Override
+    public OrderQueryVO getOrderNeeds(Long fieldId) {
+        OrderQueryVO orderQueryVO = new OrderQueryVO();
+        FieldT fieldT = fieldTMapper.selectById(fieldId);
+        orderQueryVO.setCinemaId(fieldT.getCinemaId());
+        orderQueryVO.setFilmPrice(fieldT.getPrice());
+        return orderQueryVO;
     }
 }

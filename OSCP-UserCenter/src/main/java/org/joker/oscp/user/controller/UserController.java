@@ -94,4 +94,10 @@ public class UserController {
         return CommonResult.serviceFailed("用户中心查询失败");
     }
 
+    @RequestMapping(value = "/getUserIdByUsername", method = RequestMethod.POST)
+    public Long getUserIdByUsername(@RequestParam(value = "username")String username ) {
+        return userApi.getUserId(username);
+    }
+
+
 }

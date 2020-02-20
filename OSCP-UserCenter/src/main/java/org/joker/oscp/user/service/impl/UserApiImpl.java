@@ -12,6 +12,7 @@ import org.joker.oscp.user.entity.UserDetail;
 import org.joker.oscp.user.entity.UserJoin;
 import org.joker.oscp.user.util.BcUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.EntityWriter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -143,5 +144,13 @@ public class UserApiImpl implements UserApi {
             return userModel;
         }
         return null;
+    }
+
+    @Override
+    public Long getUserId(String username) {
+        QueryWrapper entityWriter = new QueryWrapper();
+        entityWriter.eq("user_name",username);
+        User user = userMapper.selectOne(entityWriter);
+        return user.getUuid();
     }
 }

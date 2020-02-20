@@ -43,6 +43,7 @@ public class SecurityUserDetailsServiceImpl implements UserDetailsService {
                 ResultDataConvertValue<UserModel> resultDataConvertValue = new ResultDataConvertValue();
                 UserModel user = resultDataConvertValue.obResultDataConvert(commonResult, new TypeReference<UserModel>() {});
                 if (user != null) {
+
                     return new SecurityUserDetails(user.getUsername(), user.getPassword(), user.getUserState());
                 }
                 log.info("用户不存在！！！！");

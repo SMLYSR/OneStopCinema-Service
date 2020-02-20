@@ -2,7 +2,6 @@ package org.joker.oscp.system.api.cinema;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import org.joker.oscp.system.api.cinema.vo.*;
-import org.joker.oscp.system.api.cinema.vo.enums.CinemaQueryEnum;
 
 import java.util.List;
 
@@ -67,4 +66,11 @@ public interface CinemaServiceApi {
      * @return {@link FilmInfoVO}
      */
     FilmInfoVO getFilmInfoByFieldId(Long fieldId);
+
+    /**
+     * <p>为订单中心提供服务</p>
+     * @param FieldId 影院Id
+     * @return {@link OrderQueryVO}
+     */
+    OrderQueryVO getOrderNeeds(Long FieldId);
 }

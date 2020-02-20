@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @author JOKER
  */
 @Configuration
-@MapperScan(basePackages = {"org.joker.oscp.cinema.dao"})
+@MapperScan(basePackages = {"org.joker.oscp.order.dao"})
 public class MyBatisPlusConfig {
 }

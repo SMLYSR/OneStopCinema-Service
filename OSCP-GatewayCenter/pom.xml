@@ -51,6 +51,17 @@
             <artifactId>logstash-logback-encoder</artifactId>
         </dependency>
 
+        <!--   三方环境依赖  -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
         <!--  自定义依赖  -->
         <dependency>
             <groupId>org.joker.OneStopCinemaPlatform</groupId>
@@ -68,14 +79,6 @@
                 <exclusion>
                     <groupId>com.github.pagehelper</groupId>
                     <artifactId>pagehelper-spring-boot-starter</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatisplus-spring-boot-starter</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

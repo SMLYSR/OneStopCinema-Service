@@ -36,4 +36,14 @@ public interface UserCenterFeigned {
     @GetMapping(value = "/checkUsername")
     boolean checkUsername(@RequestParam String username);
 
+
+    /**
+     * <p>远程调用</p>
+     * 根据用户吗查询用户Id
+     * @param username 用户名
+     * @return 用户Id
+     */
+    @RequestMapping(value = "/getUserIdByUsername", method = RequestMethod.POST)
+    Long getUserIdByUsername(@RequestParam(value = "username")String username);
+
 }

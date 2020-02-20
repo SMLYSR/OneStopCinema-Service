@@ -1,16 +1,20 @@
 package org.joker.oscp.cinema.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
+import org.joker.oscp.cinema.service.fegined.OrderCenterFeigned;
 import org.joker.oscp.cinema.vo.CinemaConditionResponseVO;
 import org.joker.oscp.cinema.vo.CinemaFieldResponseVO;
 import org.joker.oscp.cinema.vo.CinemaFieldsResponseVO;
 import org.joker.oscp.common.CommonResult;
+import org.joker.oscp.common.util.ResultDataConvertValue;
 import org.joker.oscp.system.api.cinema.CinemaServiceApi;
 import org.joker.oscp.system.api.cinema.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,12 +26,15 @@ import java.util.List;
 @Slf4j
 @RestController
 public class CinemaController {
+    private final int SUCCESS_FLAG = 200;
 
     private CinemaServiceApi cinemaServiceApi;
+    private OrderCenterFeigned orderCenterFeigned;
 
     @Autowired
-    public CinemaController(CinemaServiceApi cinemaServiceApi) {
+    public CinemaController(CinemaServiceApi cinemaServiceApi, OrderCenterFeigned orderCenterFeigned) {
         this.cinemaServiceApi = cinemaServiceApi;
+        this.orderCenterFeigned = orderCenterFeigned;
     }
 
     @RequestMapping(value = "/getCinemas", method = RequestMethod.GET)
@@ -86,17 +93,43 @@ public class CinemaController {
             FilmInfoVO filmInfoByFieldId = cinemaServiceApi.getFilmInfoByFieldId(fieldId);
             HallInfoVO filmFieldInfo = cinemaServiceApi.getFilmFieldInfo(fieldId);
 
-            // TODO: 2020/2/18 暂时制造订单数据，后期接入订单中心
-            filmFieldInfo.setSoldSeats("1,2,3");
-            CinemaFieldResponseVO cinemaFieldResponseVO = new CinemaFieldResponseVO();
-            cinemaFieldResponseVO.setCinemaInfo(cinemaInfoById);
-            cinemaFieldResponseVO.setFilmInfo(filmInfoByFieldId);
-            cinemaFieldResponseVO.setHallInfo(filmFieldInfo);
-
-            return CommonResult.success(cinemaFieldResponseVO);
+            // 接入订单中心接口
+            CommonResult soldCR = orderCenterFeigned.getSoldSeatsByFieldId(fieldId);
+            if (soldCR.getCode() == SUCCESS_FLAG) {
+                ResultDataConvertValue<String> resultDataConvertValue = new ResultDataConvertValue();
+                String soldSeats = resultDataConvertValue.obResultDataConvert(soldCR, new TypeReference<String>() {});
+                if (!soldSeats.isEmpty()) {
+                    filmFieldInfo.setSoldSeats(soldSeats);
+                    CinemaFieldResponseVO cinemaFieldResponseVO = new CinemaFieldResponseVO();
+                    cinemaFieldResponseVO.setCinemaInfo(cinemaInfoById);
+                    cinemaFieldResponseVO.setFilmInfo(filmInfoByFieldId);
+                    cinemaFieldResponseVO.setHallInfo(filmFieldInfo);
+                    return CommonResult.success(cinemaFieldResponseVO);
+                } else {
+                    log.error("查询失败！！！{}",fieldId);
+                    return CommonResult.failed("查询失败！");
+                }
+            }
+            // TODO: 2020/2/20 暂时向前端返回错误信息，后期加入熔断降级
+            return CommonResult.failed("请求订单中心失败，服务降级！！！");
         } catch (Exception e) {
             log.error("获取选座信息失败",e);
             return CommonResult.failed("获取选座信息失败");
         }
+    }
+
+    /**
+     * <p>远程调用暴露接口</p>
+     */
+    @RequestMapping(value = "/getFilmInfoByFieldId")
+    public CommonResult getFilmInfoByFieldId(@RequestParam(value = "fieldId")Long fieldId) {
+        FilmInfoVO filmInfoVO = cinemaServiceApi.getFilmInfoByFieldId(fieldId);
+        return CommonResult.success(filmInfoVO);
+    }
+
+    @RequestMapping(value = "/getOrderNeeds")
+    public CommonResult getOrderNeeds(@RequestParam(value = "fieldId")Long fieldId) {
+        OrderQueryVO orderNeeds = cinemaServiceApi.getOrderNeeds(fieldId);
+        return CommonResult.success(orderNeeds);
     }
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 
 /**
  * 放映场次表
@@ -51,5 +53,5 @@ public class FieldT  {
     /**
      * 票价
      */
-    private Integer price;
+    private BigDecimal price;
 }

@@ -29,6 +29,11 @@ public class UserCenterFallBackFactory implements FallbackFactory<UserCenterFeig
             public boolean checkUsername(String username) {
                 return false;
             }
+
+            @Override
+            public Long getUserIdByUsername(String username) {
+                return null;
+            }
         };
     }
 }

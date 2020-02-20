@@ -2,6 +2,7 @@ package org.joker.oscp.gateway.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
+import org.joker.oscp.common.util.CurrentUser;
 import org.joker.oscp.gateway.security.model.SecurityUserDetails;
 import org.joker.oscp.gateway.security.service.UserCenterFeigned;
 import org.joker.oscp.gateway.util.JwtTokenUtil;
@@ -32,12 +33,14 @@ public class AuthController {
 
     private JwtTokenUtil jwtTokenUtil;
 
+
     @Autowired
     public AuthController(UserCenterFeigned userCenterFeigned, AuthenticationManager authenticationManager,
                           JwtTokenUtil jwtTokenUtil) {
         this.authenticationManager = authenticationManager;
         this.userCenterFeigned = userCenterFeigned;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.userCenterFeigned = userCenterFeigned;
     }
 
     @RequestMapping(value = "${jwt.auth-path}", method = RequestMethod.POST)
@@ -51,6 +54,9 @@ public class AuthController {
             log.debug("已完成鉴权！权限为：{}", authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
+            // TODO: 2020/2/20 远程调用用户中心，查询用户ID
+            Long userId = userCenterFeigned.getUserIdByUsername(authRequest.getUsername());
+            CurrentUser.saveUserId(userId);
             return CommonResult.success(userAuthorizationToken,"鉴权成功！");
         } catch (org.springframework.security.core.AuthenticationException e) {
             log.info("鉴权失败！！！");

@@ -53,4 +53,11 @@ public interface UserApi {
      * @return
      */
     UserModel selectByUsername(String username);
+
+    /**
+     * 根据用户名获取用户id
+     * @param username 用户名
+     * @return 用户Id
+     */
+    Long getUserId(String username);
 }
