@@ -26,7 +26,7 @@ jwt:
   auth-path: auth
 
 ignoreList:
-  ignore-url: /auth,/oscp,/test,/film/getIndex,/film/getConditionList,/film/getFilms,/film/films,/cinema/getCinemas,/cinema/getCondition,/cinema/getFields,/cinema/getFieldInfo #忽略列表
+  ignore-url: /auth,/oscp/user/register,/test,/film/getIndex,/film/getConditionList,/film/getFilms,/film/films,/cinema/getCinemas,/cinema/getCondition,/cinema/getFields,/cinema/getFieldInfo #忽略列表
 
 
 

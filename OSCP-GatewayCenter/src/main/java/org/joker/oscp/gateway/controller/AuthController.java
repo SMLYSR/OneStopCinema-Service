@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 鉴权控制器
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "${jwt.auth-path}", method = RequestMethod.POST)
-    public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest) {
+    public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest, HttpServletRequest rq) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new
                 UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword());
@@ -56,11 +57,16 @@ public class AuthController {
             String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
             // TODO: 2020/2/20 远程调用用户中心，查询用户ID
             Long userId = userCenterFeigned.getUserIdByUsername(authRequest.getUsername());
+            rq.getSession().setAttribute(userAuthorizationToken, userId);
             CurrentUser.saveUserId(userId);
+            Long id = CurrentUser.getCurrentUser();
             return CommonResult.success(userAuthorizationToken,"鉴权成功！");
         } catch (org.springframework.security.core.AuthenticationException e) {
             log.info("鉴权失败！！！");
             return CommonResult.forbidden();
         }
     }
+
+
+
 }

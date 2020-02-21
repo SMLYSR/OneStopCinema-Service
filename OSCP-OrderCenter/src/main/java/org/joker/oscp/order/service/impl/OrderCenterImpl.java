@@ -127,7 +127,7 @@ public class OrderCenterImpl implements OrderCenterApi {
         if (orderQueryCR.getCode() == SUCCESS_FLAG) {
             ResultDataConvertValue<OrderQueryVO> resultDataConvertValue = new ResultDataConvertValue();
             OrderQueryVO queryVO = resultDataConvertValue.
-                    obResultDataConvert(filmInfoCR, new TypeReference<OrderQueryVO>() {
+                    obResultDataConvert(orderQueryCR, new TypeReference<OrderQueryVO>() {
                     });
             if (queryVO != null) {
                 cinemaId = queryVO.getCinemaId();
@@ -153,6 +153,7 @@ public class OrderCenterImpl implements OrderCenterApi {
         orderT.setFilmId(filmId);
         orderT.setFieldId(fieldId);
         orderT.setCinemaId(cinemaId);
+        orderT.setUuid(uuid);
 
         Integer insert = orderTMapper.insert(orderT);
         if (insert > 0) {

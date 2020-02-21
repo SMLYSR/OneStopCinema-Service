@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.system.api.order.OrderCenterApi;
+import org.joker.oscp.system.api.order.vo.OrderPageVO;
 import org.joker.oscp.system.api.order.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,9 +47,8 @@ public class OrderCenterController {
     }
 
     @PostMapping(value = "/getOrderByUserId")
-    public Page<OrderVO> getOrderByUserId(@RequestParam(value = "userId")Long userId,
-                                          @RequestParam(value = "userId")Page<OrderVO> page) {
-        return orderCenterApi.getOrderByUserId(userId, page);
+    public Page<OrderVO> getOrderByUserId(@RequestBody OrderPageVO orderPageVO) {
+        return orderCenterApi.getOrderByUserId(orderPageVO.getUserId(), orderPageVO.getPage());
     }
 
 }

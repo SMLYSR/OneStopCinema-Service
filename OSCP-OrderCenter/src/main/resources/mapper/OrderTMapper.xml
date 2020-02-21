@@ -38,10 +38,10 @@
           o.`order_price` AS orderPrice,
           UNIX_TIMESTAMP(o.`order_time`) AS orderTimestamp
         FROM
-          mooc_order_t o,
-          mooc_field_t f,
-          mooc_hall_film_info_t h,
-          mooc_cinema_t c
+          oc_order o,
+          cs_field f,
+          cs_hall_film_info h,
+          cs_cinema c
         WHERE o.`cinema_id` = c.`UUID`
           AND o.`field_id` = f.`UUID`
           AND o.`film_id` = h.`film_id`
@@ -57,7 +57,8 @@
           c.`cinema_name` AS cinemaName,
           o.`seats_name` AS seatsName,
           o.`order_price` AS orderPrice,
-          UNIX_TIMESTAMP(o.`order_time`) AS orderTimestamp
+          UNIX_TIMESTAMP(o.`order_time`) AS orderTimestamp,
+          o.order_status AS orderStatus
         FROM
           oc_order o,
           cs_field f,

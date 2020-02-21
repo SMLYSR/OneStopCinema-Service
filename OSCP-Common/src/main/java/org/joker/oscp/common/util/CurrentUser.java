@@ -18,4 +18,8 @@ public class CurrentUser {
     public static Long getCurrentUser() {
         return THREAD_LOCAL.get();
     }
+
+    public static void removeUserId() {
+        THREAD_LOCAL.remove();
+    }
 }

@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.common.util.CurrentUser;
 import org.joker.oscp.gateway.service.OrderFeignedApi;
+import org.joker.oscp.gateway.util.JwtTokenUtil;
+import org.joker.oscp.system.api.order.vo.OrderPageVO;
 import org.joker.oscp.system.api.order.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +28,12 @@ import java.util.List;
 public class OrderControllerPre {
 
     private OrderFeignedApi orderFeignedApi;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    public OrderControllerPre(OrderFeignedApi orderFeignedApi){
+    public OrderControllerPre(OrderFeignedApi orderFeignedApi, JwtTokenUtil jwtTokenUtil){
        this.orderFeignedApi = orderFeignedApi;
+       this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @RequestMapping(value = "/buyTickets", method = RequestMethod.POST)
@@ -66,7 +72,10 @@ public class OrderControllerPre {
         // 使用当前登录人获取已经购买的订单
         Page<OrderVO> page = new Page<>(nowPage, pageSize);
         if (userId != null){
-            Page<OrderVO> result = orderFeignedApi.getOrderByUserId(userId, page);
+            OrderPageVO orderPageVO = new OrderPageVO();
+            orderPageVO.setUserId(userId);
+            orderPageVO.setPage(page);
+            Page<OrderVO> result = orderFeignedApi.getOrderByUserId(orderPageVO);
             int totalPages = (int)result.getPages();
             List<OrderVO> orderVOList = new ArrayList<>();
             orderVOList.addAll(result.getRecords());
@@ -74,6 +83,21 @@ public class OrderControllerPre {
         } else {
             return CommonResult.serviceFailed("用户未登陆");
         }
+    }
+
+    @RequestMapping(value = "/getUserId",method = RequestMethod.POST)
+    public Long getUserId() {
+        Long userId = CurrentUser.getCurrentUser();
+        return userId;
+    }
+
+    @RequestMapping(value = "/logoutu", method = RequestMethod.GET)
+    public void logout(HttpServletRequest httpServletRequest){
+        Long user = CurrentUser.getCurrentUser();
+        HttpSession session = httpServletRequest.getSession();
+        session.removeAttribute(httpServletRequest.getHeader(jwtTokenUtil.getHeader()));
+        CurrentUser.removeUserId();
+        log.info("退出成功{}",user);
     }
 
 }

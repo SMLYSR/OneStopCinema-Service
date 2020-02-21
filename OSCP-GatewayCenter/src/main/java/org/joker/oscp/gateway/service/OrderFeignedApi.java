@@ -1,10 +1,12 @@
 package org.joker.oscp.gateway.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import org.joker.oscp.system.api.order.vo.OrderPageVO;
 import org.joker.oscp.system.api.order.vo.OrderVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -58,11 +60,9 @@ public interface OrderFeignedApi {
 
     /**
      * 使用当前登陆人获取已经购买的订单
-     * @param userId 用户Id
      * @param page 分页项
      * @return 分页项
      */
     @PostMapping(value = "/getOrderByUserId")
-    Page<OrderVO> getOrderByUserId(@RequestParam(value = "userId")Long userId,
-                                   @RequestParam(value = "page")Page<OrderVO> page);
+    Page<OrderVO> getOrderByUserId(@RequestBody OrderPageVO page);
 }
