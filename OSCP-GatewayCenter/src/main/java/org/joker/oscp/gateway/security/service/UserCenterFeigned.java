@@ -2,6 +2,7 @@ package org.joker.oscp.gateway.security.service;
 
 import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.gateway.security.service.fallback.UserCenterFallBackFactory;
+import org.joker.oscp.system.api.user.vo.UserInfoModel;
 import org.joker.oscp.system.api.user.vo.UserModel;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,13 @@ public interface UserCenterFeigned {
      */
     @RequestMapping(value = "/getUserIdByUsername", method = RequestMethod.POST)
     Long getUserIdByUsername(@RequestParam(value = "username")String username);
+
+    /**
+     * <p>远程调用</p>
+     * @param username 用户名
+     * @return {@link UserInfoModel}
+     */
+    @GetMapping(value = "/getUserInfo")
+    UserInfoModel getUserInfo(@RequestParam(value = "username")String username);
 
 }

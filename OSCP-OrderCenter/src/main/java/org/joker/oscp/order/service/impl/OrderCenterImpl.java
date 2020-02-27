@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.common.util.ResultDataConvertValue;
@@ -18,8 +17,6 @@ import org.joker.oscp.system.api.cinema.vo.FilmInfoVO;
 import org.joker.oscp.system.api.cinema.vo.OrderQueryVO;
 import org.joker.oscp.system.api.order.OrderCenterApi;
 import org.joker.oscp.system.api.order.vo.OrderVO;
-import org.joker.oscp.system.api.user.vo.UserModel;
-import org.omg.CORBA.OMGVMCID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -203,6 +200,40 @@ public class OrderCenterImpl implements OrderCenterApi {
         } else {
             String soldSeatsByFieldId = orderTMapper.getSoldSeatsByFieldId(fieldId);
             return soldSeatsByFieldId;
+        }
+    }
+
+    @Override
+    public OrderVO getOrderInfoById(String orderId) {
+        OrderVO orderInfoById = orderTMapper.getOrderInfoById(orderId);
+        return orderInfoById;
+    }
+
+    @Override
+    public boolean paySuccess(String orderId) {
+        OrderT orderT = new OrderT();
+        orderT.setUuid(orderId);
+        orderT.setOrderStatus(1);
+
+        Integer integer = orderTMapper.updateById(orderT);
+        if (integer >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean payFail(String orderId) {
+        OrderT orderT = new OrderT();
+        orderT.setUuid(orderId);
+        orderT.setOrderStatus(2);
+
+        Integer integer = orderTMapper.updateById(orderT);
+        if (integer >= 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 

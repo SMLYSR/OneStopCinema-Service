@@ -21,7 +21,7 @@ public class OrderT {
     /**
      * 主键编号
      */
-    @TableField("UUID")
+    @TableId
     private String uuid;
     /**
      * 影院编号

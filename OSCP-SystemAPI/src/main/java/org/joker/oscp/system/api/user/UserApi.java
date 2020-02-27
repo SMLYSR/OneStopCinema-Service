@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 远程调用的用户中心接口
+ *
  * @author JOKER
  */
 @Component
@@ -13,6 +14,7 @@ public interface UserApi {
 
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @return 是否登录成功
@@ -21,6 +23,7 @@ public interface UserApi {
 
     /**
      * 用户注册
+     *
      * @param userModel
      * @return 是否注册成功
      */
@@ -28,6 +31,7 @@ public interface UserApi {
 
     /**
      * 检查用户名是否存在
+     *
      * @param username
      * @return 时候存在
      */
@@ -35,13 +39,24 @@ public interface UserApi {
 
     /**
      * 获取用户信息
+     *
      * @param uuid
      * @return 返回 {@link UserInfoModel}
      */
     UserInfoModel getUserInfo(Long uuid);
 
+
+    /**
+     * 获取用户信息
+     *
+     * @param username
+     * @return 返回 {@link UserInfoModel}
+     */
+    UserInfoModel getUserInfo(String username);
+
     /**
      * 更新用户信息
+     *
      * @param userInfoModel
      * @return 返回更新后的 {@link UserInfoModel}
      */
@@ -49,6 +64,7 @@ public interface UserApi {
 
     /**
      * 鉴权登录时的用户查询
+     *
      * @param username
      * @return
      */
@@ -56,6 +72,7 @@ public interface UserApi {
 
     /**
      * 根据用户名获取用户id
+     *
      * @param username 用户名
      * @return 用户Id
      */

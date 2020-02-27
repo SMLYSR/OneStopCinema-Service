@@ -1,7 +1,8 @@
-package org.joker.oscp.order.dao;
+package org.joker.oscp.pay.dao;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.joker.oscp.order.dao.OrderTMapper;
 import org.joker.oscp.order.entity.OrderT;
 import org.joker.oscp.order.util.UUIDUtil;
 import org.junit.Test;

@@ -20,4 +20,5 @@ public interface UserMapper extends BaseMapper<User> {
      */
     UserJoin selectByUsername(@Param("username") String username);
 
+
 }

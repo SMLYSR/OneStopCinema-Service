@@ -1,0 +1,44 @@
+server:
+  port: 9005
+  servlet:
+    context-path: /pay
+
+
+spring:
+  application:
+    name: oscp-payment-center
+  datasource:
+    url: jdbc:mysql://localhost:3306/local_dome_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.joker.oscp.order.entity;
+  global-config:
+    banner: false
+    db-config:
+      field-strategy: not_empty
+      id-type: id_worker
+    configuration:
+      map-underscore-to-camel-case: false
+      cache-enabled: true #配置的缓存的全局开关
+      lazyLoadingEnabled: true #延时加载的开关
+      multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+
+#MinIO配置
+minio:
+  endpoint: http://39.106.197.145:9090
+  bucketName: oscp #存储桶名称
+  accessKey: minioadmin #访问的key
+  secretKey: minioadmin #访问的秘钥

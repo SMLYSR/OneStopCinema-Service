@@ -17,7 +17,6 @@
     <packaging>pom</packaging>
 
     <modules>
-
         <module>OSCP-RegisterCenter</module>
         <module>OSCP-GatewayCenter</module>
         <module>OSCP-MonitorCenter</module>
@@ -26,10 +25,10 @@
         <module>OSCP-CinemaService</module>
         <module>OSCP-FilmService</module>
         <module>OSCP-OrderCenter</module>
-        <module>OSPC-PaymentCenter</module>
         <module>OSCP-SystemAPI</module>
         <module>OSCP-Common</module>
         <module>OSCP-security</module>
+        <module>OSCP-PaymentCenter</module>
     </modules>
 
     <properties>

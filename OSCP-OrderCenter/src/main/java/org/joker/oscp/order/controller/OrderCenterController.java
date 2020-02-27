@@ -2,7 +2,6 @@ package org.joker.oscp.order.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import lombok.extern.slf4j.Slf4j;
-import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.system.api.order.OrderCenterApi;
 import org.joker.oscp.system.api.order.vo.OrderPageVO;
 import org.joker.oscp.system.api.order.vo.OrderVO;
@@ -49,6 +48,16 @@ public class OrderCenterController {
     @PostMapping(value = "/getOrderByUserId")
     public Page<OrderVO> getOrderByUserId(@RequestBody OrderPageVO orderPageVO) {
         return orderCenterApi.getOrderByUserId(orderPageVO.getUserId(), orderPageVO.getPage());
+    }
+
+    @PostMapping(value = "/getOrderInfoById")
+    public OrderVO getOrderInfoById(@RequestParam(value = "orderId") String orderId) {
+        return orderCenterApi.getOrderInfoById(orderId);
+    }
+
+    @PostMapping(value = "/paySuccess")
+    public boolean paySuccess(@RequestParam(value = "orderId") String orderId) {
+        return orderCenterApi.paySuccess(orderId);
     }
 
 }

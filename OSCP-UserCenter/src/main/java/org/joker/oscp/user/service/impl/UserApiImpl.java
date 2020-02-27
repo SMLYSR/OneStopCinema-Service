@@ -105,6 +105,26 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
+    public UserInfoModel getUserInfo(String username) {
+        UserJoin userJoin = userMapper.selectByUsername(username);
+        if (userJoin != null ) {
+            UserInfoModel userInfoModel = new UserInfoModel();
+            userInfoModel.setUUID(userJoin.getUuid());
+            userInfoModel.setNickname(userJoin.getNickName());
+            userInfoModel.setAddress(userJoin.getAddress());
+            userInfoModel.setBirthday(userJoin.getBirthday());
+            userInfoModel.setEmail(userJoin.getEmail());
+            userInfoModel.setHeadAddress(userJoin.getHandUrl());
+            userInfoModel.setPhone(userJoin.getPhone());
+            userInfoModel.setSex(userJoin.getUserSex());
+            userInfoModel.setBiography(userJoin.getBiography());
+            return userInfoModel;
+        }
+        log.info("参数错误，该用户不存在，username：%s",username);
+        return null;
+    }
+
+    @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
         if (userInfoModel != null) {
             UserDetail userDetail = new UserDetail();

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
 import org.joker.oscp.gateway.security.service.UserCenterFeigned;
 import org.joker.oscp.gateway.security.service.impl.UserCenterFeignedImpl;
+import org.joker.oscp.system.api.user.vo.UserInfoModel;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,6 +33,11 @@ public class UserCenterFallBackFactory implements FallbackFactory<UserCenterFeig
 
             @Override
             public Long getUserIdByUsername(String username) {
+                return null;
+            }
+
+            @Override
+            public UserInfoModel getUserInfo(String username) {
                 return null;
             }
         };

@@ -18,7 +18,7 @@ public class OSSReader {
     private String ENDPOINT;
 
     /**
-     * 获取OSS上的json文件-【装换位json对象】
+     * 获取OSS上的json文件-【转换为json对象】
      * @param jsonAddress 座位文件的地址
      * @return 解析后的json对象
      */
