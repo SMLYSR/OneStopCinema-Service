@@ -45,18 +45,6 @@ public class UserDetailController {
         }
     }
 
-    @GetMapping(value = "/getUserInfo")
-    public CommonResult getUserInfo(@RequestParam(value = "token")String token) {
-            String username = jwtTokenUtil.getUsernameFromToken(token);
-            if (username != null) {
-                UserInfoModel userInfo = userCenterFeigned.getUserInfo(username);
-                if (userInfo != null) {
-                    return CommonResult.success(userInfo);
-                } else {
-                    return CommonResult.serviceFailed("参数错误");
-                }
-            }
-        return CommonResult.serviceFailed("没有携带token");
-    }
+
 
 }

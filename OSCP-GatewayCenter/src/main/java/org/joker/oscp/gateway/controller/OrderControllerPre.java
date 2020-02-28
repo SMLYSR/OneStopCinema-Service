@@ -91,13 +91,6 @@ public class OrderControllerPre {
         return userId;
     }
 
-    @RequestMapping(value = "/logoutu", method = RequestMethod.GET)
-    public void logout(HttpServletRequest httpServletRequest){
-        Long user = CurrentUser.getCurrentUser();
-        HttpSession session = httpServletRequest.getSession();
-        session.removeAttribute(httpServletRequest.getHeader(jwtTokenUtil.getHeader()));
-        CurrentUser.removeUserId();
-        log.info("退出成功{}",user);
-    }
+
 
 }

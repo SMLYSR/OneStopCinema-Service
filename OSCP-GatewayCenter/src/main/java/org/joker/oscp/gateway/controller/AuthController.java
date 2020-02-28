@@ -7,21 +7,21 @@ import org.joker.oscp.gateway.security.model.SecurityUserDetails;
 import org.joker.oscp.gateway.security.service.UserCenterFeigned;
 import org.joker.oscp.gateway.util.JwtTokenUtil;
 import org.joker.oscp.gateway.vo.AuthRequest;
+import org.joker.oscp.system.api.user.vo.UserInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 鉴权控制器
+ *
  * @author JOKER
  */
 @Slf4j
@@ -48,10 +48,10 @@ public class AuthController {
     public CommonResult createAuthenticationToken(@RequestBody AuthRequest authRequest, HttpServletRequest rq) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new
-                UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword());
+                UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());
 
         try {
-            Authentication  authentication = authenticationManager.authenticate(authenticationToken);
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
             log.debug("已完成鉴权！权限为：{}", authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String userAuthorizationToken = jwtTokenUtil.generateToken(authRequest.getUsername());
@@ -60,13 +60,36 @@ public class AuthController {
             rq.getSession().setAttribute(userAuthorizationToken, userId);
             CurrentUser.saveUserId(userId);
             Long id = CurrentUser.getCurrentUser();
-            return CommonResult.success(userAuthorizationToken,"鉴权成功！");
+            return CommonResult.success(userAuthorizationToken, "鉴权成功！");
         } catch (org.springframework.security.core.AuthenticationException e) {
             log.info("鉴权失败！！！");
             return CommonResult.forbidden();
         }
     }
 
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    public CommonResult getUserInfo(@RequestParam String token) {
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        if (username != null) {
+            UserInfoModel userInfo = userCenterFeigned.getUserInfo(username);
+            if (userInfo != null) {
+                return CommonResult.success(userInfo);
+            } else {
+                return CommonResult.serviceFailed("参数错误");
+            }
+        }
+        return CommonResult.serviceFailed("没有携带token");
+    }
+
+    @RequestMapping(value = "/userLogout", method = RequestMethod.POST)
+    public CommonResult logout(HttpServletRequest httpServletRequest) {
+        Long user = CurrentUser.getCurrentUser();
+        HttpSession session = httpServletRequest.getSession();
+        session.removeAttribute(httpServletRequest.getHeader(jwtTokenUtil.getHeader()));
+        CurrentUser.removeUserId();
+        log.info("退出成功{}", user);
+        return CommonResult.success("退出成功！");
+    }
 
 
 }
