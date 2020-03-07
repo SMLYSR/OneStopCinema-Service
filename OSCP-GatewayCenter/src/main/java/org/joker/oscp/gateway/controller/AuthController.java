@@ -59,7 +59,6 @@ public class AuthController {
             Long userId = userCenterFeigned.getUserIdByUsername(authRequest.getUsername());
             rq.getSession().setAttribute(userAuthorizationToken, userId);
             CurrentUser.saveUserId(userId);
-            Long id = CurrentUser.getCurrentUser();
             return CommonResult.success(userAuthorizationToken, "鉴权成功！");
         } catch (org.springframework.security.core.AuthenticationException e) {
             log.info("鉴权失败！！！");

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.joker.oscp.community.dao.ActivityReplyTMapper">
+    <resultMap id="JoinMap" type="org.joker.oscp.system.api.community.vo.ActivityReplyVO">
+        <result column="UUID" property="UUID"/>
+        <result column="content" property="content"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="head_url" property="headUrl" />
+        <result column="create_time" property="createTime"/>
+
+    </resultMap>
+
+
+    <select id="selectAllActivityReply" resultMap="JoinMap">
+        SELECT
+            ar.UUID,
+            ar.content,
+            ud.nick_name,
+            ud.head_url,
+            ar.create_time
+        FROM
+            cy_activity_user au
+            LEFT JOIN cy_activity_reply ar ON au.reply_id = ar.UUID
+            LEFT JOIN uc_user_detail ud ON ud.UUID = ar.user_id
+        WHERE
+	        a.UUID = #{ uuid }
+    </select>
+
+</mapper>

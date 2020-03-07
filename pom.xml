@@ -29,6 +29,7 @@
         <module>OSCP-Common</module>
         <module>OSCP-security</module>
         <module>OSCP-PaymentCenter</module>
+        <module>OSCP-CommunityService</module>
     </modules>
 
     <properties>

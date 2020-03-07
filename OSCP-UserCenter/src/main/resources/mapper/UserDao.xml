@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.joker.oscp.user.dao.UserMapper">
-    <resultMap id="UserJoinMap" type="org.joker.oscp.user.entity.UserJoin">
+<mapper namespace="org.joker.oscp.community.dao.UserMapper">
+    <resultMap id="UserJoinMap" type="org.joker.oscp.community.entity.UserJoin">
         <result column="UUID" property="uuid" />
         <result column="user_name" property="userName"/>
         <result column="user_pwd" property="userPwd"/>
         <result column="user_state" property="userState"/>
         <result column="nick_name" property="nickName"/>
         <result column="user_sex" property="userSex" />
-<!--                typeHandler="org.joker.oscp.user.entity.handler.UserSexEnumTypeHandler"/>-->
+<!--                typeHandler="org.joker.oscp.community.entity.handler.UserSexEnumTypeHandler"/>-->
         <result column="birthday" property="birthday"/>
         <result column="email" property="email"/>
         <result column="phone" property="phone"/>

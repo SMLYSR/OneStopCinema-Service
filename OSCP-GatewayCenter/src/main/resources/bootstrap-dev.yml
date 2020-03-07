@@ -6,8 +6,8 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka/
-#      defaultZone: http://39.106.197.145:8000/eureka/
+#      defaultZone: http://localhost:8000/eureka/
+      defaultZone: http://39.106.197.145:8000/eureka/
 
 
 zuul:
@@ -20,6 +20,14 @@ zuul:
     gateway:
       path: /**
       serviceId: oscp-gateway-center
+      strip-prefix: false
+    film:
+      path: /film/**
+      serviceId: oscp-film-service
+      strip-prefix: false
+    cinema:
+      path: /cinema/**
+      serviceId: oscp-cinema-service
       strip-prefix: false
     api-provider-server-A:
       path: /api-provider-server-A/**
