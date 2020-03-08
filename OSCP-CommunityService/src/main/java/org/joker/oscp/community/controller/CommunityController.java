@@ -32,7 +32,7 @@ public class CommunityController {
      * @return
      */
     @PostMapping(value = "/publishArticle")
-    public CommonResult publishArticle(FilmReviewVO filmReviewVO) {
+    public CommonResult publishArticle(@RequestBody FilmReviewVO filmReviewVO) {
         if (filmReviewVO != null) {
             boolean filmReview = communityServiceApi.createFilmReview(filmReviewVO);
             if (filmReview) {
@@ -51,7 +51,7 @@ public class CommunityController {
      * @return
      */
     @PostMapping(value = "/deleteArticle")
-    public CommonResult deleteArticle(Long filmReviewId) {
+    public CommonResult deleteArticle(@RequestParam Long filmReviewId) {
         if (filmReviewId != null) {
             boolean b = communityServiceApi.deleteFilmReview(filmReviewId);
             if (b) {

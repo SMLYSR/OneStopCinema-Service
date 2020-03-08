@@ -1,4 +1,4 @@
-package org.joker.oscp.community.util;
+package org.joker.oscp.user.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

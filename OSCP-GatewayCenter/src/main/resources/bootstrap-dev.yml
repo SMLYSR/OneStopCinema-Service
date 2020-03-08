@@ -29,6 +29,10 @@ zuul:
       path: /cinema/**
       serviceId: oscp-cinema-service
       strip-prefix: false
+    community:
+      path: /community/**
+      serviceId: oscp-community-service
+      strip-prefix: false
     api-provider-server-A:
       path: /api-provider-server-A/**
       serviceId: provider-server-A

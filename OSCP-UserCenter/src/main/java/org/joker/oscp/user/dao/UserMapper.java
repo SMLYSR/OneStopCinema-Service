@@ -1,9 +1,9 @@
-package org.joker.oscp.community.dao;
+package org.joker.oscp.user.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import org.joker.oscp.community.entity.User;
-import org.joker.oscp.community.entity.UserJoin;
+import org.joker.oscp.user.entity.User;
+import org.joker.oscp.user.entity.UserJoin;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -72,6 +72,7 @@ public class AuthController {
         if (username != null) {
             UserInfoModel userInfo = userCenterFeigned.getUserInfo(username);
             if (userInfo != null) {
+                log.info("{}", userInfo);
                 return CommonResult.success(userInfo);
             } else {
                 return CommonResult.serviceFailed("参数错误");

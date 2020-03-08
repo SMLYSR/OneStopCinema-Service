@@ -1,16 +1,16 @@
-package org.joker.oscp.community.service.impl;
+package org.joker.oscp.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.system.api.user.UserApi;
 import org.joker.oscp.system.api.user.vo.UserInfoModel;
 import org.joker.oscp.system.api.user.vo.UserModel;
-import org.joker.oscp.community.dao.UserDetailMapper;
-import org.joker.oscp.community.dao.UserMapper;
-import org.joker.oscp.community.entity.User;
-import org.joker.oscp.community.entity.UserDetail;
-import org.joker.oscp.community.entity.UserJoin;
-import org.joker.oscp.community.util.BcUtil;
+import org.joker.oscp.user.dao.UserDetailMapper;
+import org.joker.oscp.user.dao.UserMapper;
+import org.joker.oscp.user.entity.User;
+import org.joker.oscp.user.entity.UserDetail;
+import org.joker.oscp.user.entity.UserJoin;
+import org.joker.oscp.user.util.BcUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -88,7 +88,7 @@ public class UserApiImpl implements UserApi {
         UserDetail userDetail = userDetailMapper.selectById(uuid);
         if (userDetail != null ) {
             UserInfoModel userInfoModel = new UserInfoModel();
-            userInfoModel.setUUID(userDetail.getUuid());
+            userInfoModel.setUuid(String.valueOf(userDetail.getUuid()));
             userInfoModel.setNickname(userDetail.getNickName());
             userInfoModel.setAddress(userDetail.getAddress());
             userInfoModel.setBirthday(userDetail.getBirthday());
@@ -108,7 +108,7 @@ public class UserApiImpl implements UserApi {
         UserJoin userJoin = userMapper.selectByUsername(username);
         if (userJoin != null ) {
             UserInfoModel userInfoModel = new UserInfoModel();
-            userInfoModel.setUUID(userJoin.getUuid());
+            userInfoModel.setUuid(String.valueOf(userJoin.getUuid()));
             userInfoModel.setNickname(userJoin.getNickName());
             userInfoModel.setAddress(userJoin.getAddress());
             userInfoModel.setBirthday(userJoin.getBirthday());
@@ -127,7 +127,7 @@ public class UserApiImpl implements UserApi {
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
         if (userInfoModel != null) {
             UserDetail userDetail = new UserDetail();
-            userDetail.setUuid(userInfoModel.getUUID());
+            userDetail.setUuid(Long.valueOf(userInfoModel.getUuid()));
             userDetail.setNickName(userInfoModel.getNickname());
             userDetail.setUserSex(userInfoModel.getSex());
             userDetail.setEmail(userInfoModel.getEmail());
@@ -140,10 +140,10 @@ public class UserApiImpl implements UserApi {
             Integer integer = userDetailMapper.updateById(userDetail);
             if (integer > 0) {
                 log.info("更新成功");
-                UserInfoModel userInfo = getUserInfo(userInfoModel.getUUID());
+                UserInfoModel userInfo = getUserInfo(userInfoModel.getUuid());
                 return userInfo;
             } else {
-                log.info("uuid参数错误，用户信息关联错误！！！ %s",userInfoModel.getUUID());
+                log.info("uuid参数错误，用户信息关联错误！！！ %s",userInfoModel.getUuid());
             }
         }
         return null;

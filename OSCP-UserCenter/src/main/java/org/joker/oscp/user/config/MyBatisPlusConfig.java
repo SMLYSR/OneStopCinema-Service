@@ -1,4 +1,4 @@
-package org.joker.oscp.community.config;
+package org.joker.oscp.user.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;

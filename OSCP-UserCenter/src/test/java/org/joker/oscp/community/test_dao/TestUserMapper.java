@@ -2,11 +2,11 @@ package org.joker.oscp.community.test_dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.joker.oscp.community.dao.UserDetailMapper;
-import org.joker.oscp.community.dao.UserMapper;
-import org.joker.oscp.community.entity.User;
-import org.joker.oscp.community.entity.UserDetail;
-import org.joker.oscp.community.entity.UserJoin;
+import org.joker.oscp.user.dao.UserDetailMapper;
+import org.joker.oscp.user.dao.UserMapper;
+import org.joker.oscp.user.entity.User;
+import org.joker.oscp.user.entity.UserDetail;
+import org.joker.oscp.user.entity.UserJoin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

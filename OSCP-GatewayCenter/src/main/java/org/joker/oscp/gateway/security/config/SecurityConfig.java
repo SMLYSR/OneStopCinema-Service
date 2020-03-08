@@ -97,20 +97,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * 这块是配置跨域请求的
-     * @return Cors过滤器
-     */
-    @Bean
-    public CorsFilter corsFilter() {
-        final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        final CorsConfiguration cors = new CorsConfiguration();
-        cors.setAllowCredentials(true);
-        cors.addAllowedOrigin("*");
-        cors.addAllowedHeader("*");
-        cors.addAllowedMethod("*");
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", cors);
-        return new CorsFilter(urlBasedCorsConfigurationSource);
-    }
+//    /**
+//     * 这块是配置跨域请求的
+//     * @return Cors过滤器
+//     */
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+//        final CorsConfiguration cors = new CorsConfiguration();
+//        cors.setAllowCredentials(true);
+//        cors.addAllowedOrigin("*");
+//        cors.addAllowedHeader("*");
+//        cors.addAllowedMethod("*");
+//        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", cors);
+//        return new CorsFilter(urlBasedCorsConfigurationSource);
+//    }
 
 }

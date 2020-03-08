@@ -1,4 +1,4 @@
-package org.joker.oscp.community.controller;
+package org.joker.oscp.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;

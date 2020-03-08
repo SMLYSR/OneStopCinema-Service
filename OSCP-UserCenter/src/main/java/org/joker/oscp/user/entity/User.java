@@ -1,4 +1,4 @@
-package org.joker.oscp.community.entity;
+package org.joker.oscp.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

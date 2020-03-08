@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 public class UserInfoModel implements Serializable {
 
-    private Long UUID;
+    private String uuid;
 
     private String nickname;
 
