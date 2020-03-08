@@ -29,6 +29,9 @@ public interface CommunityServiceApi {
     boolean deleteFilmReview(Long uuid);
 
 
+    List<FilmReviewVO> selectLatestFilmReview();
+
+
     /**
      * 获取最新社区活动
      * @return {@link ActivityVO}
@@ -46,6 +49,6 @@ public interface CommunityServiceApi {
      * 参与发布社区活动
      * @return
      */
-    boolean publishActivity(Long uuid);
+    boolean publishActivity(ActivityReplyVO activityReplyVO);
 
 }

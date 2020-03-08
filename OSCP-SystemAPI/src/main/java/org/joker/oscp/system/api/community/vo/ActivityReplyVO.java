@@ -13,6 +13,8 @@ public class ActivityReplyVO {
 
     private Long UUID;
 
+    private Long activityId;
+
     private Long userId;
 
     private String content;

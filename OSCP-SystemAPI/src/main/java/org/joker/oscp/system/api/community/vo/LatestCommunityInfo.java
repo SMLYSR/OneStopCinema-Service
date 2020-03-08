@@ -1,7 +1,6 @@
 package org.joker.oscp.system.api.community.vo;
 
 import lombok.Data;
-import org.joker.oscp.system.api.film.vo.ActorVO;
 
 import java.util.List;
 

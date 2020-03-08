@@ -10,4 +10,6 @@ public class ActivityVO {
     private String contentDetail;
 
     private String activeImg;
+
+    private String DateTime;
 }

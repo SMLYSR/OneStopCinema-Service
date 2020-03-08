@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 /**
  * 社区活动
  * @author JOKER
@@ -20,6 +22,8 @@ public class ActivityT {
     private String contentDetail;
 
     private String activeImg;
+
+    private LocalDate createTime;
 
 
 }
