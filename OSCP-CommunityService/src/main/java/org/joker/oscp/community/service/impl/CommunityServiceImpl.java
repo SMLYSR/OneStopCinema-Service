@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * <p>社区服务API实现类</p>
+ * <p> 社区服务API实现类 </p>
  * @author JOKER
  */
 @Slf4j

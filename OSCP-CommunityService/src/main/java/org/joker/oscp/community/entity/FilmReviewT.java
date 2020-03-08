@@ -13,7 +13,7 @@ import lombok.Data;
 public class FilmReviewT {
 
     @TableId
-    private Long UUID;
+    private Long uuid;
 
     private Long userId;
 

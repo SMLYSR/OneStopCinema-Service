@@ -13,7 +13,7 @@ import lombok.Data;
 public class ActivityT {
 
     @TableId
-    private Long UUID;
+    private Long uuid;
 
     private String title;
 

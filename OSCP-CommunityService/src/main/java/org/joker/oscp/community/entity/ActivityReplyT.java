@@ -13,7 +13,7 @@ import lombok.Data;
 public class ActivityReplyT {
 
     @TableId
-    private Long UUID;
+    private Long uuid;
 
     private Long userId;
 

@@ -7,8 +7,16 @@
         <result column="nick_name" property="nickName"/>
         <result column="head_url" property="headUrl" />
         <result column="create_time" property="createTime"/>
-
     </resultMap>
+
+
+    <insert id="insertActivityUser">
+        INSERT INTO cy_activity_user(activity_id, reply_id) VALUES (#{ activityId }, #{ replyId })
+    </insert>
+    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="uuid" keyColumn="UUID"
+            parameterType="org.joker.oscp.community.entity.ActivityReplyT">
+        INSERT INTO cy_activity_reply(user_Id, content) VALUES (#{userId}, #{content})
+    </insert>
 
 
     <select id="selectAllActivityReply" resultMap="JoinMap">
@@ -23,7 +31,7 @@
             LEFT JOIN cy_activity_reply ar ON au.reply_id = ar.UUID
             LEFT JOIN uc_user_detail ud ON ud.UUID = ar.user_id
         WHERE
-	        a.UUID = #{ uuid }
+	        au.activity_id = #{ uuid }
     </select>
 
 </mapper>

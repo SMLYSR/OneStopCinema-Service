@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 用户中心启动类
+ * 社区服务启动类
  * @author JOKER
  */
 @EnableDiscoveryClient

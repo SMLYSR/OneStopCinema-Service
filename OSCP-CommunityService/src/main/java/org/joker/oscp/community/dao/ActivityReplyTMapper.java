@@ -7,7 +7,6 @@ import org.joker.oscp.system.api.community.vo.ActivityReplyVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 活动回复内容
@@ -22,5 +21,20 @@ public interface ActivityReplyTMapper extends BaseMapper<ActivityReplyT> {
      * @return
      */
     List<ActivityReplyVO> selectAllActivityReply(@Param("uuid") Long uuid);
+
+    /**
+     * 插入ActivityUser映射记录
+     * @param activityId 活动Id
+     * @param replyId 活动Id
+     * @return
+     */
+    int insertActivityUser(Long activityId, Long replyId);
+
+    /**
+     * 插入活动回复后获得Id
+     * @param activityReplyT
+     * @return
+     */
+    int insertAndGetId(ActivityReplyT activityReplyT);
 
 }
