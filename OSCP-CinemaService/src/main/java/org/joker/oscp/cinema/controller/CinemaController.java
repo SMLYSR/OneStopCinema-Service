@@ -87,7 +87,7 @@ public class CinemaController {
     }
 
     @RequestMapping(value = "/getFieldInfo", method = RequestMethod.POST)
-    public CommonResult getFieldInfo(Long cinemaId, Long fieldId) {
+    public CommonResult getFieldInfo(@RequestParam Long cinemaId, @RequestParam Long fieldId) {
         try {
             CinemaInfoVO cinemaInfoById = cinemaServiceApi.getCinemaInfoById(cinemaId);
             FilmInfoVO filmInfoByFieldId = cinemaServiceApi.getFilmInfoByFieldId(fieldId);

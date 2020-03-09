@@ -17,7 +17,8 @@ spring:
 
 server:
   port: 8001
-
+  tomcat:
+    basedir: ${user.home}/tomcat/tmp
 
 jwt:
   header: X-Auth-Token   #jwt的请求头
@@ -26,7 +27,10 @@ jwt:
   auth-path: auth
 
 ignoreList:
-  ignore-url: /checkUsername,/auth,/oscp/user/register,/oscp/community/getLatestActivity,/film/getIndex,/film/getConditionList,/film/getFilms,/film/films,/cinema/getFieldInfo #忽略列表
+  ignore-url: /checkUsername,/auth,/oscp/user/register,/oscp/community/getAllActivityReply,/oscp/community/getLatestActivity,/oscp/film/getIndex,/oscp/film/getConditionList,/oscp/film/getFilms,/oscp/film/films,/oscp/cinema/getFieldInfo,/oscp/cinema/getCinemas,/oscp/cinema/getCondition,/oscp/cinema/getFields #忽略列表
+
+
+
 
 
 

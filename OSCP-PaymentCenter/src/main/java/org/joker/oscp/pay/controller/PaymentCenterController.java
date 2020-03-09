@@ -28,6 +28,7 @@ public class PaymentCenterController {
 
     @PostMapping(value = "/getOrderStatus")
     public AliPayResultVO getOrderStatus(@RequestParam(value = "orderId")String orderId) {
+        // TODO: 2020/3/10 回归测试发现，调用支付接口会出现前两次失败，后两次成功的问题，需要再次Debug
         return paymentCenterApi.getOrderStatus(orderId);
     }
 

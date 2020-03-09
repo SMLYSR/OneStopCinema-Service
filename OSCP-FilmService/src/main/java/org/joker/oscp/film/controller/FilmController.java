@@ -2,6 +2,8 @@ package org.joker.oscp.film.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.joker.oscp.common.CommonResult;
+import org.joker.oscp.film.service.CommunityFeignedApi;
+import org.joker.oscp.system.api.community.vo.LatestCommunityInfo;
 import org.joker.oscp.system.api.film.FilmServiceApi;
 import org.joker.oscp.system.api.film.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,12 @@ import java.util.List;
 public class FilmController {
 
     private FilmServiceApi filmServiceApi;
+    private CommunityFeignedApi communityFeignedApi;
 
     @Autowired
-    public FilmController(FilmServiceApi filmServiceApi) {
+    public FilmController(FilmServiceApi filmServiceApi, CommunityFeignedApi communityFeignedApi) {
         this.filmServiceApi = filmServiceApi;
+        this.communityFeignedApi = communityFeignedApi;
     }
 
     /**
@@ -43,6 +47,9 @@ public class FilmController {
         filmIndexVO.setNewTrailers(filmServiceApi.getNewTrailer());
         // TODO: 2020/2/15  获取社区信息
         // 待社区模块开发完成，远程调用
+        LatestCommunityInfo communityInfoByIndex = communityFeignedApi.getCommunityInfoByIndex();
+        filmIndexVO.setFilmReviewVOList(communityInfoByIndex.getFilmReviewVOList());
+        filmIndexVO.setActivityVO(communityInfoByIndex.getActivityVO());
         return CommonResult.success(filmIndexVO);
     }
 
