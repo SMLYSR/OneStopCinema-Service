@@ -1,7 +1,10 @@
-package org.joker.oscp.community.test_dao;
+package org.joker.oscp.user.test_dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import javafx.scene.effect.SepiaTone;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.joker.oscp.common.util.CurrentUser;
 import org.joker.oscp.user.dao.UserDetailMapper;
 import org.joker.oscp.user.dao.UserMapper;
 import org.joker.oscp.user.entity.User;
@@ -101,4 +104,5 @@ public class TestUserMapper {
         UserJoin userJoin = userMapper.selectByUsername(username);
         log.info("result: {}", userJoin);
     }
+
 }
